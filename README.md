@@ -18,5 +18,6 @@ Cloning Netflix Movie App
 - [x] Header styling
 - [ ] Animation - Logo / SearchBar / Scroll
 
-- [ ] Home Page
-- [ ]
+- [ ] Home - Styling
+- [ ] Home - Data Fetching
+- [ ] Home - Image Scroll and Styling 
