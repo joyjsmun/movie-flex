@@ -16,6 +16,7 @@ Cloning Netflix Movie App
 - [x] Initial Page Setup
 - [x] Routing
 - [x] Header styling
+- [x] Motion -Circle dot movement
 - [ ] Animation - Logo / SearchBar / Scroll
 
 - [ ] Home - Styling

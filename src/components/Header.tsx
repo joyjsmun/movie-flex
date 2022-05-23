@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import styled from "styled-components"
 
 const Nav = styled.nav`
@@ -31,7 +31,22 @@ const Item = styled.li`
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 `
+
+const Circle = styled(motion.div)`
+    width: 10px;
+    height: 10px;
+    background-color: blue;
+    border-radius: 5px;
+    
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    margin-top: 10px;
+`
+
 
 const Search = styled.div``
 const SearchInput = styled.input``
@@ -47,15 +62,11 @@ const icon = {
     }
   }
 
-const Circle = styled.div`
-    width: 10px;
-    height: 10px;
-    background-color: blue;
-    border-radius: 5px;
-    margin-top: 10px;
-`
 
 function Header(){
+
+    const location = useLocation()
+    
     return (
         <>
         <Nav>
@@ -81,13 +92,13 @@ function Header(){
                 <Item>
                     <Link to="/">
                     Home
-                    <Circle  />
+                    {location.pathname === "/" ? <Circle layoutId="circle" /> : null}
                 </Link>
-                </Item>   
+                </Item >   
                 <Item>
                 <Link to="/tv">
                     TV Show
-                <Circle />
+                    {location.pathname === "/tv" ? <Circle layoutId="circle" /> : null}
                 </Link>
                 </Item>
             </Menu>
