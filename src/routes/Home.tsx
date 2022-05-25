@@ -4,6 +4,7 @@ import { getMovies, IMovies } from "../api";
 import { makeImagePath } from "../utils";
 import {AnimatePresence, motion} from "framer-motion"
 import { useState } from "react";
+import { type } from "os";
 
 
 const Wrapper = styled.div`
@@ -53,7 +54,8 @@ const Box = styled(motion.div)<{bgPhoto:string}>`
     background-image: url(${props => props.bgPhoto});
     background-size: cover;
     background-position: center center;
-    
+    &:first-child { transform-origin : center left}
+    &:last-child {transform-origin:center right}
 `
 
 const rowVariants = {
@@ -71,6 +73,21 @@ const rowVariants = {
 
 const offset = 6;
 
+
+const boxVariants = {
+    normal:{
+        scale:1
+    },
+    hover:{
+        scale:1.2,
+        y:-50,
+        transition:{
+            delay:0.2,
+            duration:0.3,
+            type:"tween"
+        }
+    }
+}
 
 function Home(){
     const {data,isLoading} = useQuery<IMovies>(["movies","nowPlaying"],getMovies) 
@@ -105,7 +122,14 @@ function Home(){
                     <Row variants={rowVariants} initial="hidden" animate="visible" exit="exit" key={index} transition={{type:"tween", duration:1}}>
                         {data?.results.slice(1).slice(offset*index, offset*index + offset)
                         .map((movie) => (
-                            <Box key={movie.id} bgPhoto ={makeImagePath(movie.backdrop_path,"w500")}/>
+                            <Box 
+                            key={movie.id} 
+                            bgPhoto ={makeImagePath(movie.backdrop_path,"w500")}
+                            variants={boxVariants}
+                            initial="normal"
+                            whileHover="hover"
+                            transition={{type:"tween"}}
+                            />
                         ))
                         }
                     </Row>
