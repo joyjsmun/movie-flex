@@ -89,6 +89,32 @@ const boxVariants = {
     }
 }
 
+const Info = styled(motion.div)`
+    padding:20px;
+    width: 100%;
+    position: absolute;
+    bottom:0;
+    opacity: 0;
+    
+    h4{
+        font-size: 17px;
+        text-align: center;
+        color:${props => props.theme.white.lighter}
+    }
+    background-color:${props => props.theme.black.lighter}
+`
+
+const infoVariants = {
+    hover:{
+        opacity:0.8,
+    transition:{
+        delay:0.3,
+        duration:0.1,
+        type:"tween"
+    }
+    }
+}
+
 function Home(){
     const {data,isLoading} = useQuery<IMovies>(["movies","nowPlaying"],getMovies) 
     const [index,setIndex] = useState(0);
@@ -129,7 +155,11 @@ function Home(){
                             initial="normal"
                             whileHover="hover"
                             transition={{type:"tween"}}
-                            />
+                            >
+                                <Info variants={infoVariants}>
+                                    <h4>{movie.title}</h4>
+                                </Info>
+                            </Box>
                         ))
                         }
                     </Row>
