@@ -2,7 +2,7 @@ import {useQuery} from "react-query"
 import styled from "styled-components";
 import { getMovies, IMovies } from "../api";
 import { makeImagePath } from "../utils";
-import {AnimatePresence, motion} from "framer-motion"
+import {AnimatePresence, motion,useViewportScroll} from "framer-motion"
 import { useState } from "react";
 import { type } from "os";
 import { Navigate, useMatch, useNavigate } from "react-router-dom";
@@ -117,12 +117,31 @@ const infoVariants = {
     }
 }
 
+const MovieModal = styled(motion.div)`
+    width: 40vw;
+    height: 80vh;
+    left:0;
+    right: 0;
+    margin:0 auto;
+    background-color: tomato;
+    position: absolute;
+`
+
+const OverLay = styled(motion.div)`
+    position: fixed;
+    height: 100vh;
+    top:0;
+    width: 100%;
+    opacity: 0;
+    background-color: rgba(0,0,0,0.5);
+`
 
 
 function Home(){
-    const {data,isLoading} = useQuery<IMovies>(["movies","nowPlaying"],getMovies) 
+    const {data,isLoading} = useQuery<IMovies>(["movies","nowPlaying"],getMovies);
     const [index,setIndex] = useState(0);
     const [leaving,setLeaving] =useState(false);
+    const {scrollY} = useViewportScroll()
     const modalMovieMatch = useMatch("/movies/:movieId")
     console.log(modalMovieMatch)
     const toggleLeaving = () => setLeaving(prev => !prev)
@@ -142,6 +161,10 @@ function Home(){
 
     const boxModalHandle = (movieId:number) => {
        navigate(`/movies/${movieId}`)
+    }
+
+    const backToHome = () => {
+        navigate(`/`)
     }
 
     return (
@@ -181,18 +204,14 @@ function Home(){
                 </Slider>
                 <AnimatePresence>
                         {modalMovieMatch !== null ? 
-                    <motion.div 
+                            <>
+                    <OverLay animate={{opacity:1}} exit={{opacity:1}} onClick={backToHome} />
+                    <MovieModal 
                     layoutId={modalMovieMatch.params.movieId}
-                    style = {{width: "40vw",
-                        height: "80vh",
-                        top:20,
-                        left:0,
-                        right: 0,
-                        margin:"0 auto",
-                        backgroundColor: "tomato",
-                        position: "absolute"
-                    }} 
-                        /> : null}
+                    style={{top:scrollY.get() + 50}}
+                        >Hello</MovieModal>
+                        </>
+                        : null}
                 </AnimatePresence>
                 </>
         )}
