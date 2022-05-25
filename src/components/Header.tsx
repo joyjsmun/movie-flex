@@ -127,7 +127,7 @@ function Header(){
     
     return (
         <>
-        <Nav variants={navVariants} animate={navAnimation} initial={"top"}>
+        <Nav variants={navVariants} animate={navAnimation} initial={"top"} exit={"top"}>
             <Menu>
             <Logo>
                 <motion.svg

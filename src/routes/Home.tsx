@@ -23,7 +23,7 @@ const Banner = styled.div<{bgPhoto:string}>`
 `
 
 const Title = styled.h2`
-    font-family: 'Indie Flower', cursive;
+   
     font-size: 7vh;
 
 `
@@ -31,7 +31,7 @@ const Title = styled.h2`
 const Desc  = styled.p`
     font-size: 2.2vh;
     font-weight: 200;
-    font-family: 'Indie Flower', cursive;
+   
     width: 50%;
 `
 const Slider = styled.div`
@@ -117,15 +117,6 @@ const infoVariants = {
     }
 }
 
-const MovieModal = styled(motion.div)`
-    width: 40vw;
-    height: 80vh;
-    left:0;
-    right: 0;
-    margin:0 auto;
-    background-color: tomato;
-    position: absolute;
-`
 
 const OverLay = styled(motion.div)`
     position: fixed;
@@ -134,7 +125,42 @@ const OverLay = styled(motion.div)`
     width: 100%;
     opacity: 0;
     background-color: rgba(0,0,0,0.5);
+
+    `
+        
+    
+
+const MovieModal = styled(motion.div)`
+    width: 50vw;
+    height: 90vh;
+    padding:30px;
+    left:0;
+    right: 0;
+    margin:0 auto;
+    background-color: ${props => props.theme.black.darker};
+    position: absolute;
+    border-radius: 14px;
 `
+
+
+const MovieModalImg = styled.div`
+        width:100%;
+        background-size:cover;
+        background-position:center center;
+        height:500px;
+
+`
+
+    const MovieModalTitle = styled.h3`
+        position: relative;
+        font-size: xx-large;
+        bottom: 17vh;
+        padding: 35px;
+    `
+        
+    const MovieModalOverView = styled.p``
+
+
 
 
 function Home(){
@@ -143,7 +169,6 @@ function Home(){
     const [leaving,setLeaving] =useState(false);
     const {scrollY} = useViewportScroll()
     const modalMovieMatch = useMatch("/movies/:movieId")
-    console.log(modalMovieMatch)
     const toggleLeaving = () => setLeaving(prev => !prev)
     const increaseIndex = () =>  {
        if(data){
@@ -167,16 +192,20 @@ function Home(){
         navigate(`/`)
     }
 
+    const clickedMovie = modalMovieMatch?.params.movieId && data?.results.find(movie => movie.id + ""=== modalMovieMatch?.params.movieId );
+    console.log(clickedMovie);
+
+    
     return (
     <Wrapper>
         {isLoading ? "Loading..." : (
                 <>
                 <Banner
                     onClick={increaseIndex}
-                    bgPhoto = {makeImagePath(data?.results[4].backdrop_path || " ")}
+                    bgPhoto = {makeImagePath(data?.results[7].backdrop_path || " ")}
                 >
-                <Title>{data?.results[0].title}</Title>
-                <Desc>{data?.results[0].overview}</Desc>
+                <Title>{data?.results[7].title}</Title>
+                <Desc>{data?.results[7].overview}</Desc>
                 </Banner>
                 <Slider>
                     <AnimatePresence initial={false} onExitComplete={toggleLeaving}>
@@ -206,10 +235,16 @@ function Home(){
                         {modalMovieMatch !== null ? 
                             <>
                     <OverLay animate={{opacity:1}} exit={{opacity:1}} onClick={backToHome} />
-                    <MovieModal 
-                    layoutId={modalMovieMatch.params.movieId}
-                    style={{top:scrollY.get() + 50}}
-                        >Hello</MovieModal>
+                    <MovieModal layoutId={modalMovieMatch.params.movieId} style={{top:scrollY.get() + 50}}>
+                            {clickedMovie ? 
+                                <>
+                                <MovieModalImg style={{ 
+                                    backgroundImage:`linear-gradient(to top, #1a1919, transparent),url(${makeImagePath(clickedMovie.backdrop_path,"w500")})`
+                                }}/>
+                                <MovieModalTitle>{clickedMovie.title}</MovieModalTitle>
+                                <MovieModalOverView>{clickedMovie.overview}</MovieModalOverView>
+                                </> : null}
+                    </MovieModal>
                         </>
                         : null}
                 </AnimatePresence>

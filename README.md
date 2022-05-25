@@ -21,7 +21,9 @@ Cloning Netflix Movie App
 - [x] Home - Styling
 - [x] Home - Data Fetching
 - [x] Home - Slide Scrolling function
-- [ ] Home - Slide Scrolling styling 
+- [x] Home - Slide Scrolling styling 
+- [ ] Home - Box Animation 
+- [ ] Home - Movie Modal
 
 - [ ] TvShow 
 - [ ] Search
