@@ -11,9 +11,7 @@ import { ReactQueryDevtools } from 'react-query/devtools'
 
 const GlobalStyle = createGlobalStyle`
 /* @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap'); */
-@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Inter:wght@200;300;400;500;600;700&family=Source+Code+Pro&family=Source+Sans+Pro:wght@300;400&family=Titillium+Web:wght@200;300;600;700;900&display=swap');
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Indie+Flower&family=Titillium+Web:wght@200;300;600;700;900&display=swap');
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,

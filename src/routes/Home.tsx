@@ -4,7 +4,9 @@ import { getMovies, IMovies } from "../api";
 import { makeImagePath } from "../utils";
 
 
-const Wrapper = styled.div``
+const Wrapper = styled.div`
+    background-color: black;
+`
 
 const Banner = styled.div<{bgPhoto:string}>`
     height: 100vh;
@@ -17,13 +19,15 @@ const Banner = styled.div<{bgPhoto:string}>`
 `
 
 const Title = styled.h2`
+    font-family: 'Indie Flower', cursive;
     font-size: 7vh;
-    font-weight: 600;
-    margin-bottom: 25px;
+
 `
 
 const Desc  = styled.p`
     font-size: 2.2vh;
+    font-weight: 200;
+    font-family: 'Indie Flower', cursive;
     width: 50%;
 `
 const Slider = styled.div``
@@ -39,7 +43,7 @@ function Home(){
         {isLoading ? "Loading..." : (
                 <>
                 <Banner
-                    bgPhoto = {makeImagePath(data?.results[0].backdrop_path || " ")}
+                    bgPhoto = {makeImagePath(data?.results[3].backdrop_path || " ")}
                 >
                 <Title>{data?.results[0].title}</Title>
                 <Desc>{data?.results[0].overview}</Desc>
