@@ -133,7 +133,6 @@ const OverLay = styled(motion.div)`
 const MovieModal = styled(motion.div)`
     width: 50vw;
     height: 90vh;
-    padding:30px;
     left:0;
     right: 0;
     margin:0 auto;
@@ -144,6 +143,7 @@ const MovieModal = styled(motion.div)`
 
 
 const MovieModalImg = styled.div`
+        border-radius: 15px 15px 0px 0px; 
         width:100%;
         background-size:cover;
         background-position:center center;
@@ -158,7 +158,9 @@ const MovieModalImg = styled.div`
         padding: 35px;
     `
         
-    const MovieModalOverView = styled.p``
+    const MovieModalOverView = styled.p`
+        margin: 30px;
+    `
 
 
 
