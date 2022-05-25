@@ -10,15 +10,14 @@ Cloning Netflix Movie App
 - Styled-components
 - Framer-motion
 
-
 - [x] Initail npm packages settings
 - [x] Theme Settings
 - [x] Initial Page Setup
 - [x] Routing
 - [x] Header styling
 - [x] Motion -Circle dot movement
-- [ ] Animation - Logo / SearchBar / Scroll
+- [x] Animation - Logo / SearchBar / Scroll
 
-- [ ] Home - Styling
-- [ ] Home - Data Fetching
+- [x] Home - Styling
+- [x] Home - Data Fetching
 - [ ] Home - Image Scroll and Styling 
