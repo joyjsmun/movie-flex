@@ -1,3 +1,5 @@
+import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
 import { useQuery } from "react-query";
 import styled from "styled-components";
 import { getTvs, ITvs } from "../api";
@@ -32,7 +34,7 @@ const Slider = styled.div`
     top:-100px;
 `
 
-const Row = styled.div`
+const Row = styled(motion.div)`
 display: grid;
 grid-template-columns: repeat(6,1fr);
 gap:10px;
@@ -40,34 +42,51 @@ width: 100%;
 position: absolute;
 `
 
-const Box = styled.div`
+const Box = styled(motion.div)`
 background-color: white;
 height: 200px;
 color:red;
 font-size: 50px;
 `
 
+const rowVariants = {
+    hidden :{
+        x:1000
+    },
+    visible:{
+        x:0
+    },
+    exit:{
+        x:-1000
+    }
+}
+
 
 function Tv(){
     const {data,isLoading} = useQuery<ITvs>(["tvs","nowPlaying"],getTvs)
-    console.log(data)
+    const [index,setIndex] = useState(0);
+    const increaseIndex = () => setIndex(prev => prev +1)
 
     return (<Wrapper>
         {isLoading ? "Loading..." : (
             <>
-            <Banner bgPhoto={makeImagePath(data?.results[0].backdrop_path || " ")}>
+            <Banner 
+                onClick={increaseIndex}
+                bgPhoto={makeImagePath(data?.results[0].backdrop_path || " ")}>
                 <Title>{data?.results[0].name}</Title>
                 <Desc>{data?.results[0].overview}</Desc>
             </Banner>
             <Slider>
-                <Row>
-                    <Box>1</Box>
-                    <Box>2</Box>
-                    <Box>3</Box>
-                    <Box>4</Box>
-                    <Box>5</Box>
-                    <Box>6</Box>
-                </Row>
+               <AnimatePresence>
+                <Row key={index} variants={rowVariants} initial="hidden" animate="visible" exit="exit" >
+                        <Box>1</Box>
+                        <Box>2</Box>
+                        <Box>3</Box>
+                        <Box>4</Box>
+                        <Box>5</Box>
+                        <Box>6</Box>
+                    </Row>
+               </AnimatePresence>
             </Slider>
             </>
         )}
