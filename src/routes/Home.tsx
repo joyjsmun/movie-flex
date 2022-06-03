@@ -41,7 +41,7 @@ const Slider = styled.div`
 const Row = styled(motion.div)`
     display: grid;
     grid-template-columns: repeat(6,1fr);
-    grid-gap: 10px;
+    grid-gap: 5px;
     position: absolute;
     width: 100%;
 `
