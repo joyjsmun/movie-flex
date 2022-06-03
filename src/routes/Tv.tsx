@@ -37,7 +37,7 @@ const Slider = styled.div`
 const Row = styled(motion.div)`
 display: grid;
 grid-template-columns: repeat(6,1fr);
-gap:10px;
+gap:5px;
 width: 100%;
 position: absolute;
 `
@@ -51,13 +51,13 @@ font-size: 50px;
 
 const rowVariants = {
     hidden :{
-        x:1000
+        x:window.outerWidth+5
     },
     visible:{
         x:0
     },
     exit:{
-        x:-1000
+        x:-window.outerWidth-5
     }
 }
 
@@ -65,7 +65,13 @@ const rowVariants = {
 function Tv(){
     const {data,isLoading} = useQuery<ITvs>(["tvs","nowPlaying"],getTvs)
     const [index,setIndex] = useState(0);
-    const increaseIndex = () => setIndex(prev => prev +1)
+    const [leaving,setLeaving] = useState(false);
+    const toggleLeaving = () => setLeaving(prev => !prev)
+    const increaseIndex = () => {
+        if(leaving) return;
+        toggleLeaving()
+        setIndex(prev => prev +1)
+    }
 
     return (<Wrapper>
         {isLoading ? "Loading..." : (
@@ -77,8 +83,8 @@ function Tv(){
                 <Desc>{data?.results[0].overview}</Desc>
             </Banner>
             <Slider>
-               <AnimatePresence>
-                <Row key={index} variants={rowVariants} initial="hidden" animate="visible" exit="exit" >
+               <AnimatePresence onExitComplete={toggleLeaving}>
+                <Row key={index} variants={rowVariants} initial="hidden" animate="visible" exit="exit" transition={{type:"tween",duration:1}} >
                         <Box>1</Box>
                         <Box>2</Box>
                         <Box>3</Box>
