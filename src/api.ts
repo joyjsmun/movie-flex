@@ -60,5 +60,5 @@ export function getMovies(){
 }
 
 export function getTvs(){
-    return fetch(`${BASE_URL}/tv/popular?api_key=${API_KEY}&language=en-US&page=1`).then(res => res.json())
+    return fetch(`${BASE_URL}tv/popular?api_key=${API_KEY}&language=en-US&page=1`).then(res => res.json())
 }
