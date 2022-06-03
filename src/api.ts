@@ -26,7 +26,39 @@ export interface IMovies{
         total_results:number
     }
 
+export interface ITv{
+    backdrop_path: string,
+      first_air_date: string,
+      genre_ids: [
+       number
+      ],
+      id: number,
+      name: string,
+      origin_country: [
+       string
+      ],
+      original_language: string,
+      original_name: string,
+      overview: string, 
+      popularity: number,
+      poster_path: string,
+      vote_average: number,
+      vote_count: number
+    }
+
+
+
+export interface ITvs{
+    results:ITv[],
+    total_pages:number,
+    total_results:number
+}
+
 
 export function getMovies(){
    return fetch(`${BASE_URL}movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`).then(res => res.json())
+}
+
+export function getTvs(){
+    return fetch(`${BASE_URL}/tv/popular?api_key=${API_KEY}&language=en-US&page=1`).then(res => res.json())
 }

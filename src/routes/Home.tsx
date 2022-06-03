@@ -4,8 +4,7 @@ import { getMovies, IMovies } from "../api";
 import { makeImagePath } from "../utils";
 import {AnimatePresence, motion,useViewportScroll} from "framer-motion"
 import { useState } from "react";
-import { type } from "os";
-import { Navigate, useMatch, useNavigate } from "react-router-dom";
+import { useMatch, useNavigate } from "react-router-dom";
 
 
 const Wrapper = styled.div`
@@ -161,8 +160,6 @@ const MovieModalImg = styled.div`
     const MovieModalOverView = styled.p`
         margin: 30px;
     `
-
-
 
 
 function Home(){
