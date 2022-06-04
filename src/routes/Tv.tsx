@@ -57,6 +57,7 @@ background-position: center center;
 &:last-child{
     transform-origin: center right;
 }
+position: relative;
 `
 
 const rowVariants = {
@@ -71,9 +72,11 @@ const rowVariants = {
     }
 }
 
+const offset = 6;
+
 const boxVariants = {
-    initial:{
-        scale:0
+    start:{
+        scale:1
     },
     hover:{
         scale:1.3,
@@ -85,7 +88,6 @@ const boxVariants = {
     }
 }
 
-const offset = 6;
 
 function Tv(){
     const {data,isLoading} = useQuery<ITvs>(["tvs","popular"],getTvs)
@@ -106,7 +108,8 @@ function Tv(){
 
     
 
-    return (<Wrapper>
+    return (
+    <Wrapper>
         {isLoading ? "Loading..." : (
             <>
             <Banner 
@@ -122,7 +125,7 @@ function Tv(){
                        <Box 
                        key={tv.id}
                        variants={boxVariants}
-                       initial="initial"
+                       initial="start"
                        whileHover="hover"
                        transition={{type:"tween"}}
                        bgphoto={makeImagePath(tv?.backdrop_path === null ? tv?.poster_path : tv?.backdrop_path ,"w500")}
