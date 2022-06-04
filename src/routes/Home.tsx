@@ -11,14 +11,14 @@ const Wrapper = styled.div`
     background-color: black;
 `
 
-const Banner = styled.div<{bgPhoto:string}>`
+const Banner = styled.div<{bgphoto:string}>`
     height: 100vh;
     display: flex;
     padding:60px;
     flex-direction: column;
     background-size: cover;
     justify-content: center;
-    background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,1)),url(${props => props.bgPhoto});
+    background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,1)),url(${props => props.bgphoto});
 `
 
 const Title = styled.h2`
@@ -46,12 +46,12 @@ const Row = styled(motion.div)`
     width: 100%;
 `
 
-const Box = styled(motion.div)<{bgPhoto:string}>`
+const Box = styled(motion.div)<{bgphoto:string}>`
     background-color: white;
     height: 200px;
     color: red;
     font-size: 50px;
-    background-image: url(${props => props.bgPhoto});
+    background-image: url(${props => props.bgphoto});
     background-size: cover;
     background-position: center center;
     &:first-child { transform-origin : center left}
@@ -164,6 +164,7 @@ const MovieModalImg = styled.div`
 
 function Home(){
     const {data,isLoading} = useQuery<IMovies>(["movies","nowPlaying"],getMovies);
+    console.log(data);
     const [index,setIndex] = useState(0);
     const [leaving,setLeaving] =useState(false);
     const {scrollY} = useViewportScroll()
@@ -201,7 +202,7 @@ function Home(){
                 <>
                 <Banner
                     onClick={increaseIndex}
-                    bgPhoto = {makeImagePath(data?.results[7].backdrop_path || " ")}
+                    bgphoto = {makeImagePath(data?.results[7].backdrop_path || " ")}
                 >
                 <Title>{data?.results[7].title}</Title>
                 <Desc>{data?.results[7].overview}</Desc>
@@ -215,7 +216,7 @@ function Home(){
                             layoutId = {movie.id + ""}
                             onClick={() => boxModalHandle(movie.id)}
                             key={movie.id} 
-                            bgPhoto ={makeImagePath(movie.backdrop_path,"w500")}
+                            bgphoto ={makeImagePath(movie.backdrop_path,"w500")}
                             variants={boxVariants}
                             initial="normal"
                             whileHover="hover"

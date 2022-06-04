@@ -9,14 +9,14 @@ const Wrapper = styled.div`
     background-color: tomato;
 `
 
-const Banner = styled.div<{bgPhoto:string}>`
+const Banner = styled.div<{bgphoto:string}>`
     height: 100vh;
     display: flex;
     padding: 60px;
     flex-direction: column;
     justify-content: center;
     background-size: cover;
-    background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0.7)),url(${props => props.bgPhoto});
+    background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0.7)),url(${props => props.bgphoto});
 `
 
 const Title = styled.h2`
@@ -43,12 +43,12 @@ width: 100%;
 position: absolute;
 `
 
-const Box = styled(motion.div)<{bgPhoto:string}>`
+const Box = styled(motion.div)<{bgphoto:string}>`
 background-color: white;
 height: 200px;
 color:red;
 font-size: 50px;
-background-image: url(${props => props.bgPhoto});
+background-image: url(${props => props.bgphoto});
 background-size: cover;
 background-position: center center;
 &:first-child{
@@ -88,40 +88,47 @@ const boxVariants = {
 const offset = 6;
 
 function Tv(){
-    const {data,isLoading} = useQuery<ITvs>(["tvs","nowPlaying"],getTvs)
+    const {data,isLoading} = useQuery<ITvs>(["tvs","popular"],getTvs)
     const [index,setIndex] = useState(0);
     const [leaving,setLeaving] = useState(false);
     const toggleLeaving = () => setLeaving(prev => !prev)
     const increaseIndex = () => {
         if(data){
-        if(leaving) return;
-        toggleLeaving()
-        const tvResultsNum = data?.results.length -1;
-        // because index is starting from '0'
-        const maxIndex = Math.floor(tvResultsNum / 6) -1;
-        setIndex(prev => prev === maxIndex ? 0 : prev+1);
+            if(leaving) return;
+            const offset = 6;
+            const tvResultsNum = data.results.length -1;
+            // because index is starting from '0'
+            const maxIndex = Math.floor(tvResultsNum / offset)-1;
+            toggleLeaving()
+            setIndex(prev => prev === maxIndex ? 0 : prev+1);
         }
     }
+
+    
 
     return (<Wrapper>
         {isLoading ? "Loading..." : (
             <>
             <Banner 
                 onClick={increaseIndex}
-                bgPhoto={makeImagePath(data?.results[0].backdrop_path || " ")}>
+                bgphoto={makeImagePath(data?.results[0].backdrop_path || " ")}>
                 <Title>{data?.results[0].name}</Title>
                 <Desc>{data?.results[0].overview}</Desc>
             </Banner>
             <Slider>
                <AnimatePresence initial={false} onExitComplete={toggleLeaving}>
                 <Row key={index} variants={rowVariants} initial="hidden" animate="visible" exit="exit" transition={{type:"tween",duration:1}} >
-                       {data?.results.slice(1).slice(offset*index,offset*index+offset).map(tv => 
+                       {data?.results.slice(1).slice(offset*index,offset*index+offset).map((tv) => (
                        <Box 
+                       key={tv.id}
                        variants={boxVariants}
                        initial="initial"
                        whileHover="hover"
                        transition={{type:"tween"}}
-                       bgPhoto={makeImagePath(tv?.backdrop_path,"w500")}/>)}
+                       bgphoto={makeImagePath(tv?.backdrop_path === null ? tv?.poster_path : tv?.backdrop_path ,"w500")}
+                       />
+                       ))
+                       }
                     </Row>
                </AnimatePresence>
             </Slider>
