@@ -49,16 +49,33 @@ height: 200px;
 color:red;
 font-size: 50px;
 background-image: url(${props => props.bgphoto});
-background-size: cover;
-background-position: center center;
+    background-size: cover;
+    background-position: center center;
+
 &:first-child{
     transform-origin: center left;
 }
 &:last-child{
     transform-origin: center right;
 }
-position: relative;
+
 `
+
+
+const Info = styled(motion.div)`
+   padding: 20px;
+   background-color: ${props => props.theme.black.lighter};
+   position: absolute;
+   width: 100%;
+   bottom: 0;
+   opacity: 0;
+   h4{
+       font-size: 15px;
+       text-align: center;
+       color: ${props => props.theme.white.darker};
+   }
+`
+
 
 const rowVariants = {
     hidden :{
@@ -83,8 +100,21 @@ const boxVariants = {
         transition:{
             type:"tween",
             delay:0.4,
+            duration:0.3,
+        }
+    }
+}
+
+const infoVariants = {
+    hover:{
+        opacity:0.8,
+        transition:{
+            type:"tween",
+            delay:0.4,
             duration:0.3
         }
+    
+
     }
 }
 
@@ -129,7 +159,11 @@ function Tv(){
                        whileHover="hover"
                        transition={{type:"tween"}}
                        bgphoto={makeImagePath(tv?.backdrop_path === null ? tv?.poster_path : tv?.backdrop_path ,"w500")}
-                       />
+                      >
+                          <Info variants={infoVariants}>
+                            <h4>{tv.name}</h4>
+                          </Info>
+                          </Box>
                        ))
                        }
                     </Row>
