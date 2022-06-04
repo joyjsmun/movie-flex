@@ -1,9 +1,11 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useViewportScroll } from "framer-motion";
 import { useState } from "react";
 import { useQuery } from "react-query";
 import styled from "styled-components";
 import { getTvs, ITvs } from "../api";
 import { makeImagePath } from "../utils";
+import { useNavigate,useParams } from 'react-router-dom';
+
 
 const Wrapper = styled.div`
     background-color: tomato;
@@ -118,8 +120,30 @@ const infoVariants = {
     }
 }
 
+const Overlay = styled(motion.div)`
+    position: fixed;
+    top:0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    opacity: 0;
+`
+
+const BoxModal = styled(motion.div)`
+        width:40vw;
+        height:50vh;
+        background-color:tomato;
+        position: absolute;
+        left:0;
+        right: 0;
+        margin:0 auto;
+`
+
 
 function Tv(){
+    const navigate = useNavigate();
+    const {scrollY} = useViewportScroll()
+    const boxParam = useParams()
     const {data,isLoading} = useQuery<ITvs>(["tvs","popular"],getTvs)
     const [index,setIndex] = useState(0);
     const [leaving,setLeaving] = useState(false);
@@ -136,7 +160,10 @@ function Tv(){
         }
     }
 
-    
+    const boxClicked = (tvId:number) => {
+        navigate(`/tv/${tvId}`)
+    }
+    const overlayClicked = () => navigate(`/tv`);
 
     return (
     <Wrapper>
@@ -153,6 +180,8 @@ function Tv(){
                 <Row key={index} variants={rowVariants} initial="hidden" animate="visible" exit="exit" transition={{type:"tween",duration:1}} >
                        {data?.results.slice(1).slice(offset*index,offset*index+offset).map((tv) => (
                        <Box 
+                       layoutId={tv.id + ""}
+                       onClick={() => boxClicked(tv.id)}
                        key={tv.id}
                        variants={boxVariants}
                        initial="start"
@@ -169,6 +198,14 @@ function Tv(){
                     </Row>
                </AnimatePresence>
             </Slider>
+            <AnimatePresence>
+                {boxParam.tvId ? (
+                <>
+                <Overlay onClick={overlayClicked} exit={{opacity:0}} animate={{opacity:1}} />
+                <BoxModal layoutId={boxParam.tvId} style={{top:scrollY.get() + 100}} ></BoxModal>
+                </>
+                ) : null}
+            </AnimatePresence>
             </>
         )}
     </Wrapper>)
