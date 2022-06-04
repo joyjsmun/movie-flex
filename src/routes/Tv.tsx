@@ -1,10 +1,11 @@
-import { AnimatePresence, motion, useViewportScroll } from "framer-motion";
+import { AnimatePresence, motion, motionValue, useViewportScroll } from "framer-motion";
 import { useState } from "react";
 import { useQuery } from "react-query";
 import styled from "styled-components";
 import { getTvs, ITvs } from "../api";
 import { makeImagePath } from "../utils";
 import { useNavigate,useParams } from 'react-router-dom';
+import { url } from "inspector";
 
 
 const Wrapper = styled.div`
@@ -130,13 +131,36 @@ const Overlay = styled(motion.div)`
 `
 
 const BoxModal = styled(motion.div)`
-        width:40vw;
-        height:50vh;
-        background-color:tomato;
-        position: absolute;
-        left:0;
-        right: 0;
-        margin:0 auto;
+     width: 50vw;
+    height: 60vh;
+    left:0;
+    right: 0;
+    margin:0 auto;
+    background-color: ${props => props.theme.black.darker};
+    position: absolute;
+    border-radius: 14px;
+        
+`
+
+const ModalImg = styled(motion.div)`
+     border-radius: 15px 15px 0px 0px; 
+        width:100%;
+        background-size:cover;
+        background-position:center center;
+        height:500px;
+
+
+`
+
+const ModalTitle = styled.h4`
+        position: relative;
+        font-size: xx-large;
+        bottom: 17vh;
+        padding: 35px;
+`
+
+const ModalDesc = styled.p`
+     margin: 30px;
 `
 
 
@@ -164,6 +188,10 @@ function Tv(){
         navigate(`/tv/${tvId}`)
     }
     const overlayClicked = () => navigate(`/tv`);
+
+    const tvDetail = boxParam.tvId && data?.results.find(tv => tv.id + "" === boxParam.tvId)
+
+    console.log(tvDetail)
 
     return (
     <Wrapper>
@@ -202,7 +230,15 @@ function Tv(){
                 {boxParam.tvId ? (
                 <>
                 <Overlay onClick={overlayClicked} exit={{opacity:0}} animate={{opacity:1}} />
-                <BoxModal layoutId={boxParam.tvId} style={{top:scrollY.get() + 100}} ></BoxModal>
+                <BoxModal layoutId={boxParam.tvId} style={{top:scrollY.get() + 100}} >
+                    {tvDetail ? 
+                    <>
+                    <ModalImg style={{backgroundImage:`url(${makeImagePath(tvDetail?.backdrop_path,"w500")})`}} />
+                    <ModalTitle>{tvDetail.name}</ModalTitle> 
+                    <ModalDesc>{tvDetail.overview}</ModalDesc>
+                    </>
+                    : null}
+                </BoxModal>
                 </>
                 ) : null}
             </AnimatePresence>

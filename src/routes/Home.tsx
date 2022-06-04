@@ -131,7 +131,7 @@ const OverLay = styled(motion.div)`
 
 const MovieModal = styled(motion.div)`
     width: 50vw;
-    height: 90vh;
+    height: 60vh;
     left:0;
     right: 0;
     margin:0 auto;
