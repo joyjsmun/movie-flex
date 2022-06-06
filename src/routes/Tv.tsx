@@ -132,7 +132,7 @@ const Overlay = styled(motion.div)`
 
 const BoxModal = styled(motion.div)`
      width: 50vw;
-    height: 60vh;
+    height: 80vh;
     left:0;
     right: 0;
     margin:0 auto;

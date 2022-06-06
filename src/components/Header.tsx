@@ -100,6 +100,8 @@ interface IForm{
     keyword:string
 }
 
+
+
 function Header(){
     const [searchOpen,setSearchOpen] = useState(false)
     const location = useLocation()
@@ -110,7 +112,10 @@ function Header(){
     const {register,handleSubmit} = useForm<IForm>()
     const onValid = (data:IForm) => {
         navigate(`/search?keyword=${data.keyword}`);
+       
     }
+
+
 
     useEffect(()=>{
         scrollY.onChange(()=>{
@@ -134,6 +139,9 @@ function Header(){
         }
         setSearchOpen((prev) => !prev);
       };
+
+
+
     
     return (
         <>

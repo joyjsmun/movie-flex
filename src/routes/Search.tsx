@@ -1,11 +1,23 @@
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useQuery } from "react-query";
+import { useSearchParams } from "react-router-dom";
+import { getResults, IResults } from "../api";
 
 function Search(){
     const [searchParams] = useSearchParams();
     const keyword = searchParams.get("keyword");
-    console.log(keyword)
+    const {data,isLoading} = useQuery<IResults>(["search",keyword],() => getResults(keyword + ""));
     
-    return <div>Search</div>
+    
+    return (
+      <div>
+            {isLoading ? "...loading" : (
+            <>
+            {data?.results.map(item => <li>{item.title || item.original_title}</li>)}
+            </>
+        )}
+      </div>
+        
+    )
 }
 
 export default Search;
