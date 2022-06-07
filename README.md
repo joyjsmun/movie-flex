@@ -27,7 +27,8 @@ Cloning Netflix Movie App
 - [x] Home - Complete Modal 
 
 - [x] TvShow - Same as Home
-- [ ] TvShow - Styling
-- [ ] Search request / API
-- [ ] Search result
+- [x] TvShow - Styling
+- [x] Search request / API
+- [x] Search result
+- [ ] Search - Styling
 - [ ] Movie / Tv Detail page
