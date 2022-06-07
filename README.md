@@ -32,3 +32,4 @@ Cloning Netflix Movie App
 - [ ] Search result / Devide Slide
 - [ ] Search - Styling
 - [ ] Movie / Tv Detail page
+- [ ] Hide API
