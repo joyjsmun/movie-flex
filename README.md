@@ -29,6 +29,6 @@ Cloning Netflix Movie App
 - [x] TvShow - Same as Home
 - [x] TvShow - Styling
 - [x] Search request / API
-- [x] Search result
+- [ ] Search result / Devide Slide
 - [ ] Search - Styling
 - [ ] Movie / Tv Detail page
