@@ -1,5 +1,3 @@
-import { API_KEY } from "./coinfig"
-
 const BASE_URL = "https://api.themoviedb.org/3/"
 
 export interface IMovie{
@@ -86,14 +84,14 @@ export interface IResult{
 
 
 export function getMovies(){
-   return fetch(`${BASE_URL}movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`).then(res => res.json())
+   return fetch(`${BASE_URL}movie/now_playing?api_key=${process.env.API_KEY}}&language=en-US&page=1`).then(res => res.json())
 }
 
 export function getTvs(){
-    return fetch(`${BASE_URL}tv/popular?api_key=${API_KEY}&language=en-US&page=1`).then(res => res.json())
+    return fetch(`${BASE_URL}tv/popular?api_key=${process.env.API_KEY}&language=en-US&page=1`).then(res => res.json())
 }
 
 export function getResults(keyword:string){
-    return fetch(`${BASE_URL}search/multi?api_key=${API_KEY}&language=en-US&query=${keyword}&page=1&include_adult=false`).then(res => res.json())
+    return fetch(`${BASE_URL}search/multi?api_key=${process.env.API_KEY}&language=en-US&query=${keyword}&page=1&include_adult=false`).then(res => res.json())
 }
 
