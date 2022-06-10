@@ -1,4 +1,4 @@
-import { API_KEY } from "../coinfig"
+import { API_KEY } from "./coinfig"
 
 const BASE_URL = "https://api.themoviedb.org/3/"
 
