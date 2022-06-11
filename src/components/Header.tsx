@@ -69,9 +69,13 @@ const SearchInput = styled(motion.input)`
     height: 25px;
     background-color: transparent;
     color:white;
-    ::placeholder {color: white;}
+    ::placeholder {color: white;
+    background-color: transparent;
+    }
     :focus {
-     border: none
+     border: none;
+     outline: none;
+
 }
 `
 
