@@ -36,6 +36,7 @@ Cloning Netflix Movie App
 - [x] Search result / Devide Slide
 - [x] Search - Styling
 - [ ] Search / Movie / Tv - Detail page
+- [ ] No image path => Logo Image
 - [ ] Loading Page
 
 - [x] Hide API
