@@ -14,18 +14,30 @@ background-color: black;
 const Slider = styled.div`
   background-color: tomato;
   height: 100vh;
-  display: flex;
-  padding:60px;
-   position: relative;
+  position: relative;
   top:130px;
 `
 
-const Row = styled(motion.div)`
+const Row = styled.div`
 display: grid;
 grid-template-columns: repeat(6,1fr);
 grid-gap: 5px;
 position: absolute;
 width: 100%;
+`
+
+const Box = styled.div`
+  background-color: white;
+  height: 200px;
+`
+
+const MovieList = styled.div`
+  display: flex;
+  align-items: baseline;
+h4{
+  padding-left: 10px;
+}
+
 `
 
 function Search(){
@@ -39,8 +51,14 @@ function Search(){
      {isLoading ? "Loading..." : (
      <>
      <Slider>
-          <h4>Explore titles related to: {data?.results.map(item => <span>{item?.name || item?.original_title || item.title || item.original_name} | </span>)}</h4>
-          <Row></Row>
+          <MovieList>Explore titles related to : {data?.results.slice(0, 10).map(item => <h4>{item?.name || item?.original_title || item.title || item.original_name} |</h4>)}</MovieList>
+          <Row>
+            {data?.results.map(item => (
+              <Box>
+
+              </Box>
+            ))}
+          </Row>
        </Slider>
      </>
      )}
