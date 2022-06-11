@@ -12,13 +12,15 @@ background-color: black;
 
 `
 const Slider = styled.div`
-  background-color: tomato;
+  /* background-color: tomato; */
   height: 100vh;
   position: relative;
   top:130px;
+
 `
 
 const Row = styled.div`
+padding: 0px 60px 0px 60px;
 display: grid;
 grid-template-columns: repeat(6,1fr);
 grid-gap: 5px;
@@ -29,9 +31,11 @@ width: 100%;
 const Box = styled.div`
   background-color: white;
   height: 200px;
+  margin-bottom: 4vw;
 `
 
 const MovieList = styled.div`
+  padding-left: 60px;
   display: flex;
   align-items: baseline;
 h4{

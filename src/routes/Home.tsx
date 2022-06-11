@@ -36,9 +36,11 @@ const Desc  = styled.p`
 const Slider = styled.div`
     position: relative;
     top:-100px;
+    
 `
 
 const Row = styled(motion.div)`
+    padding: 0px 20px 0px 20px;
     display: grid;
     grid-template-columns: repeat(6,1fr);
     grid-gap: 5px;
