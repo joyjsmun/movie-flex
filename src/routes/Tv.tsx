@@ -1,11 +1,11 @@
-import { AnimatePresence, motion, motionValue, useViewportScroll } from "framer-motion";
+import { AnimatePresence, motion,useViewportScroll } from "framer-motion";
 import { useState } from "react";
 import { useQuery } from "react-query";
 import styled from "styled-components";
 import { getTvs, ITvs } from "../api";
 import { makeImagePath } from "../utils";
 import { useNavigate,useParams } from 'react-router-dom';
-import { url } from "inspector";
+
 
 
 const Wrapper = styled.div`

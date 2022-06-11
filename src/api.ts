@@ -1,4 +1,6 @@
 const BASE_URL = "https://api.themoviedb.org/3/"
+const API_KEY = process.env.REACT_APP_API_KEY
+//const API_KEY = "1658d974cfe4b0e4bc7eedbd02cc8660"
 
 export interface IMovie{
     backdrop_path: string,
@@ -84,14 +86,14 @@ export interface IResult{
 
 
 export function getMovies(){
-   return fetch(`${BASE_URL}movie/now_playing?api_key=${process.env.API_KEY}}&language=en-US&page=1`).then(res => res.json())
+   return fetch(`${BASE_URL}movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`).then(res => res.json())
 }
 
 export function getTvs(){
-    return fetch(`${BASE_URL}tv/popular?api_key=${process.env.API_KEY}&language=en-US&page=1`).then(res => res.json())
+    return fetch(`${BASE_URL}tv/popular?api_key=${API_KEY}&language=en-US&page=1`).then(res => res.json())
 }
 
 export function getResults(keyword:string){
-    return fetch(`${BASE_URL}search/multi?api_key=${process.env.API_KEY}&language=en-US&query=${keyword}&page=1&include_adult=false`).then(res => res.json())
+    return fetch(`${BASE_URL}search/multi?api_key=${API_KEY}&language=en-US&query=${keyword}&page=1&include_adult=false`).then(res => res.json())
 }
 
