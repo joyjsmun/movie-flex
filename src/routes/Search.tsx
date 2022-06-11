@@ -1,5 +1,6 @@
 
 
+import {motion } from "framer-motion";
 import { useQuery } from "react-query";
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
@@ -29,7 +30,7 @@ position: absolute;
 width: 100%;
 `
 
-const Box = styled.div<{bgphoto:string}>`
+const Box = styled(motion.div)<{bgphoto:string}>`
   background-color: transparent;
   border:0.7px solid #232323;
   height: 200px;
@@ -38,7 +39,22 @@ const Box = styled.div<{bgphoto:string}>`
   background-image: url(${props => props.bgphoto});
   background-position: center center;
   background-size: cover;
+  cursor: pointer;
 `
+
+const boxVariants = {
+  normal:{
+    scale:1
+  },
+  hover:{
+    scale:1.3,
+    transition:{
+      type:"tween",
+      delay:0.4,
+      duration:0.3
+    }
+  }
+}
 
 const MovieList = styled.div`
   padding-left: 60px;
@@ -49,6 +65,33 @@ h4{
 }
 
 `
+
+const Info = styled(motion.div)`
+    padding:20px;
+    width: 100%;
+    position: absolute;
+    bottom:0;
+    opacity: 0;
+    
+    h4{
+        font-size: 17px;
+        text-align: center;
+        color:${props => props.theme.white.lighter}
+    }
+    background-color:${props => props.theme.black.lighter}
+`
+
+const infoVariants = {
+  hover:{
+    opacity:0.8,
+    transition:{
+        delay:0.3,
+        duration:0.1,
+        type:"tween",
+     }
+  }
+
+}
 
 function Search(){
     const [searchParams] = useSearchParams();
@@ -62,12 +105,18 @@ function Search(){
      <>
      <Slider>
           <MovieList>Explore titles related to : {data?.results.slice(0, 5).map(item => <h4>{item?.name || item?.original_title || item.title || item.original_name} |</h4>)}</MovieList>
+         
           <Row>
             {data?.results.map(item => (
               <Box
+               variants={boxVariants}
+               initial="normal"
+               whileHover="hover"
                 bgphoto = {makeImagePath(item?.backdrop_path || item?.poster_path,"w500")}
               >
-
+                  <Info variants={infoVariants}>
+                    <h4>{item?.name || item?.original_title || item.title || item.original_name}</h4>
+                  </Info>
               </Box>
             ))}
           </Row>

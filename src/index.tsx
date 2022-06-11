@@ -72,6 +72,11 @@ a {
   text-decoration:none;
   color:inherit;
 }
+
+*:focus {
+    outline: none;
+}
+
 `;
 
 const client = new QueryClient()

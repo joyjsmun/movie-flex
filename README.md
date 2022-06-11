@@ -10,6 +10,10 @@ Cloning Netflix Movie App
 - Styled-components
 - Framer-motion
 
+
+
+----- Todos
+
 - [x] Initail npm packages settings
 - [x] Theme Settings
 - [x] Initial Page Setup
@@ -29,7 +33,9 @@ Cloning Netflix Movie App
 - [x] TvShow - Same as Home
 - [x] TvShow - Styling
 - [x] Search request / API
-- [ ] Search result / Devide Slide
-- [ ] Search - Styling
-- [ ] Movie / Tv Detail page
-- [ ] Hide API
+- [x] Search result / Devide Slide
+- [x] Search - Styling
+- [ ] Search / Movie / Tv - Detail page
+- [ ] Loading Page
+
+- [x] Hide API

@@ -9,7 +9,7 @@ import { useNavigate,useParams } from 'react-router-dom';
 
 
 const Wrapper = styled.div`
-    background-color: tomato;
+   background-color: black;
 `
 
 const Banner = styled.div<{bgphoto:string}>`
