@@ -75,8 +75,8 @@ const SearchInput = styled(motion.input)`
     :focus {
      border: none;
      outline: none;
-
-}
+     background-color: transparent;
+    }
 `
 
 const icon = {

@@ -139,7 +139,7 @@ const BoxModal = styled(motion.div)`
     margin:0 auto;
     background-color: ${props => props.theme.black.darker};
     position: absolute;
-    border-radius: 14px;
+    border-radius: 5px;
         
 `
 
