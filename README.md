@@ -40,3 +40,8 @@ Cloning Netflix Movie App
 - [ ] Loading Page
 
 - [x] Hide API
+
+
+
+Issue 
+- [ ] Home hover image 

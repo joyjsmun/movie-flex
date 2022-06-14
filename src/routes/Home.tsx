@@ -63,14 +63,14 @@ const Box = styled(motion.div)<{bgphoto:string}>`
 
 const rowVariants = {
     hidden:{
-        x: window.outerWidth+10
+        x: window.outerWidth+5
     },
     visible:{
         x:0
     }
     ,
     exit:{
-        x:-window.outerWidth-10
+        x:-window.outerWidth-5
     }
 }
 
@@ -83,11 +83,10 @@ const boxVariants = {
     },
     hover:{
         scale:1.2,
-        y:-50,
         transition:{
-            delay:0.2,
+            type:"tween",
+            delay:0.4,
             duration:0.3,
-            type:"tween"
         }
     }
 }
