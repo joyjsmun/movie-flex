@@ -47,3 +47,10 @@ Cloning Netflix Movie App
 
 Issue 
 - [ ] Home hover image 
+
+
+
+Future Implement for Web3 function or others
+- Able to use the own personal coins
+- Able to add Prisma DB
+- Other Animation functions
