@@ -29,12 +29,14 @@ Cloning Netflix Movie App
 - [x] Home - Box Animation 
 - [x] Home - Movie Modal
 - [x] Home - Complete Modal 
+- [ ] Home - Implement Arrow slider
 
 - [x] TvShow - Same as Home
 - [x] TvShow - Styling
 - [x] Search request / API
 - [x] Search result / Devide Slide
 - [x] Search - Styling
+- [ ] Search - Styling part.2
 - [ ] Search / Movie / Tv - Detail page
 - [ ] No image path => Logo Image
 - [ ] Loading Page
