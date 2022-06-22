@@ -1,6 +1,6 @@
 # MovieFlex
 
-Cloning Netflix Movie App
+Cloning Netflix Movie App by using React
 
 - React
 - Typescript
@@ -40,6 +40,10 @@ Cloning Netflix Movie App
 - [ ] Search / Movie / Tv - Detail page
 - [ ] No image path => Logo Image
 - [ ] Loading Page
+- [ ] Detail - video clip links
+- [ ] Like / Dislike buttons
+- [ ] Detail - cast information
+- [ ] Detail - more like this
 
 - [x] Hide API
 
